@@ -1,21 +1,61 @@
 #!/usr/bin/env ruby
 
 require 'cucumber-slices'
+require 'docopt'
 
-feature_name = ARGV[0]
+doc = <<DOCOPT
+  cucumber-slices
 
-cs = CucumberSlices.new
+  Usage:
+    cucumber-slices [<feature_file>]
 
-feature_file = "./features/#{feature_name}.feature"
-step_file = "./features/step_definitions/#{feature_name}_steps.rb"
+  Options:
+    -h                    Show this message.
+    --lines=<line_range>  Range for feature file
 
-open(step_file) do |file|
-  cs.extract_steps file
+DOCOPT
+# opts = {}
+begin
+  require "pp"
+  opts = Docopt::docopt(doc)
+rescue Docopt::Exit => e
+  puts e.message
+end
+# feature_name = ARGV[0]
+#
+if opts['-h']
+  puts doc
 end
 
-splice = []
-open(feature_file) do |file|
-  splice = cs.splice_features file
-end
 
-puts splice
+if opts['<feature_file>']
+
+  cs = CucumberSlices.new
+
+  feature_file = opts['<feature_file>']
+  feature_name = File.basename feature_file, '.feature'
+  step_file = "#{File.dirname feature_file}/step_definitions/#{feature_name}_steps.rb"
+  # also try with a - instead of a _
+  if ! File.exists? step_file
+    step_file_with_underscore = "#{File.dirname feature_file}/step_definitions/#{feature_name}-steps.rb"
+    step_file = step_file_with_underscore if File.exists? step_file_with_underscore
+  end
+
+  # catch 'em all!
+  # TODO: don't catch them all, just catch file not found
+  begin
+    open(step_file) do |file|
+      cs.extract_steps file
+    end
+
+    splice = []
+    open(feature_file) do |file|
+      splice = cs.splice_features file
+    end
+    puts splice
+  rescue
+    puts "#{$!}"
+    exit(0)
+  end
+
+end

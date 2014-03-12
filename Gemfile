@@ -12,6 +12,7 @@ group :development do
   gem "bundler", "~> 1.0"
   gem "jeweler", "~> 2.0.1"
   gem "simplecov", ">= 0"
+  gem "docopt", "~> 0.5", ">= 0.5.0"
 end
 group :test do
   gem "debugger", ">= 1.6.6"
