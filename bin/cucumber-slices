@@ -7,11 +7,12 @@ doc = <<DOCOPT
   cucumber-slices
 
   Usage:
-    cucumber-slices [<feature_file>]
+    cucumber-slices <feature_file> [--lines=<line_range>]
 
   Options:
     -h                    Show this message.
-    --lines=<line_range>  Range for feature file
+    --version             Show version.
+    --lines=<line_range>  Range for feature file.
 
 DOCOPT
 # opts = {}
@@ -21,15 +22,24 @@ begin
 rescue Docopt::Exit => e
   puts e.message
 end
-# feature_name = ARGV[0]
-#
+
 if opts['-h']
   puts doc
 end
 
+puts opts
 
 if opts['<feature_file>']
-
+  lines_range = nil
+  if opts['--lines']
+    lines_opt= opts['--lines'].split("-")
+    from_to = lines_opt.map {|line_no| line_no.to_i}
+    if (from_to.length != 2) or (from_to[0] == from_to[1])
+      puts "bad lines arguement #{lines}"
+      exit(0)
+    end
+    lines_range = (from_to[0]..from_to[1])
+  end
   cs = CucumberSlices.new
 
   feature_file = opts['<feature_file>']
@@ -50,10 +60,10 @@ if opts['<feature_file>']
 
     splice = []
     open(feature_file) do |file|
-      splice = cs.splice_features file
+      splice = cs.splice_features file, lines_range
     end
     puts splice
-  rescue
+  rescue IOError
     puts "#{$!}"
     exit(0)
   end
