@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'cucumber-slices'
+
+feature_name = ARGV[0]
+
+cs = CucumberSlices.new
+
+feature_file = "./features/#{feature_name}.feature"
+step_file = "./features/step_definitions/#{feature_name}_steps.rb"
+
+open(step_file) do |file|
+  cs.extract_steps file
+end
+
+splice = []
+open(feature_file) do |file|
+  splice = cs.splice_features file
+end
+
+puts splice

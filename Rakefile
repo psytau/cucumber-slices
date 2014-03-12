@@ -17,10 +17,11 @@ Jeweler::Tasks.new do |gem|
   gem.name = "cucumber-slices"
   gem.homepage = "http://github.com/psytau/cucumber-slices"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{view steps along with your cukes}
+  gem.description = %Q{view steps along with your cukes}
   gem.email = "rmanninoFoo@gmail.com"
   gem.authors = ["psytau"]
+  gem.executables = ['cucumber-slices']
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -37,8 +38,8 @@ task :simplecov do
   Rake::Task['spec'].execute
 end
 
-require 'cucumber/rake/task'
-Cucumber::Rake::Task.new(:features)
+#require 'cucumber/rake/task'
+#Cucumber::Rake::Task.new(:features)
 
 task :default => :spec
 
