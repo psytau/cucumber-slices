@@ -23,6 +23,11 @@ rescue Docopt::Exit => e
   puts e.message
 end
 
+if !opts
+  puts doc
+  exit
+end
+
 if opts['-h']
   puts doc
 end
