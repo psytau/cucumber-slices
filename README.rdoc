@@ -1,17 +1,27 @@
 = cucumber-slices
 
-Description goes here.
+Puts your steps right under your cucumber features.
 
-== Contributing to cucumber-slices
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+== Usage
 
+Say you have a feature called tic-tac-toe and you have written steps for it Just type
+
+  cucumber-slices tic-tac-toe
+
+and get something like this...
+
+  6 Scenario: Begin Game
+  7 	Given I start a new Tic-Tac-Toe game
+  	  @game = TicTacToe.new
+  8 	When I enter my name Renee
+  	  @game.player = name
+  9 	Then the computer welcomes me to the game with "Welcome Renee"
+  	  @game.welcome_player.should eq arg1
+  10 		And randomly chooses who goes first
+  		  [@game.player, "Computer"].should include @game.current_player
+  11 		And who is X and who is O
+  		  TicTacToe::SYMBOLS.should include @game.player_symbol, @game.computer_symbol
+  
 == Copyright
 
 Copyright (c) 2014 psytau. See LICENSE.txt for
