@@ -35,21 +35,23 @@ class CucumberSlices
     # end
   end
 
-  def splice_features feature_file
+  def splice_features(feature_file, lines=nil)
     # open ('features/tic-tac-toe.feature') do |file|
       splice = []
       count = 0
       feature_file.each do |line|
         count = count + 1
-        splice << "#{count.to_s} #{line}"
-        if line =~ /^([ \t]+)(Given|When|Then|And) (.+)/
-          indent = $1
-          cmd = $2
-          code = $3
-          @steps.each do |step|
-            if code =~ Regexp.new(step.regex)
-              step.code.each do |l|
-                splice << "#{indent}#{l}"
+        if !lines or lines.include?(count)
+          splice << "#{count.to_s} #{line}"
+          if line =~ /^([ \t]+)(Given|When|Then|And) (.+)/
+            indent = $1
+            cmd = $2
+            code = $3
+            @steps.each do |step|
+              if code =~ Regexp.new(step.regex)
+                step.code.each do |l|
+                  splice << "#{indent}#{l}"
+                end
               end
             end
           end
