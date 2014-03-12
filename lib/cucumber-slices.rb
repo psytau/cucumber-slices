@@ -15,8 +15,6 @@ class CucumberSlices
     cmd = nil
     code = []
     @steps = []
-    #open('features/step_definitions/tic-tac-toe-steps.rb') do |file|
-    # open(file_name) do |file|
       file.each do |line|
         if line =~ /^end/
           in_cmd_block = false
@@ -32,11 +30,9 @@ class CucumberSlices
           code << line if in_cmd_block
         end
       end
-    # end
   end
 
   def splice_features(feature_file, lines=nil)
-    # open ('features/tic-tac-toe.feature') do |file|
       splice = []
       count = 0
       feature_file.each do |line|
