@@ -7,3 +7,8 @@ Feature: View steps and cukes together
     Given a tic-tac-toe feature file and a step file
     When I slice them.
     Then The program should return lines of the cuke followed by the steps
+
+  Scenario: View a portion of a feature file
+    Given a tic-tac-toe feature file and a step file
+    When I slice them with a lines=(2..3) arguement
+    Then Then it should return lines 2 to 3 of the feature

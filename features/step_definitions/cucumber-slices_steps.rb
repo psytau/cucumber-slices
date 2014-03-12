@@ -48,4 +48,20 @@ Then(/^The program should return lines of the cuke followed by the steps$/) do
   @output[3].should == "2 #{@cuke_lines[1]}"
   @output[4].should == "  \t\t#{@step_lines[6]}"
   @output[5].should == "  \t\t#{@step_lines[7]}"
+  @output[6].should == "3 #{@cuke_lines[2]}"
+  @output[7].should == "  \t\t#{@step_lines[11]}"
+end
+
+When(/^I slice them with a lines=\((\d+)\.\.(\d+)\) arguement$/) do |arg1, arg2|
+  @cs = CucumberSlices.new
+  @cs.extract_steps @step_lines
+  @output = @cs.splice_features @cuke_lines, (arg1.to_i()..arg2.to_i())
+end
+
+Then(/^Then it should return lines 2 to 3 of the feature$/) do
+  @output[0].should == "2 #{@cuke_lines[1]}"
+  @output[1].should == "  \t\t#{@step_lines[6]}"
+  @output[2].should == "  \t\t#{@step_lines[7]}"
+  @output[3].should == "3 #{@cuke_lines[2]}"
+  @output[4].should == "  \t\t#{@step_lines[11]}"
 end
