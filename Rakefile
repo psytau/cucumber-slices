@@ -38,8 +38,8 @@ task :simplecov do
   Rake::Task['spec'].execute
 end
 
-#require 'cucumber/rake/task'
-#Cucumber::Rake::Task.new(:features)
+require 'cucumber/rake/task'
+Cucumber::Rake::Task.new(:features)
 
 task :default => :spec
 
