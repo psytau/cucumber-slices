@@ -27,8 +27,6 @@ if opts['-h']
   puts doc
 end
 
-puts opts
-
 if opts['<feature_file>']
   lines_range = nil
   if opts['--lines']
@@ -51,8 +49,6 @@ if opts['<feature_file>']
     step_file = step_file_with_underscore if File.exists? step_file_with_underscore
   end
 
-  # catch 'em all!
-  # TODO: don't catch them all, just catch file not found
   begin
     open(step_file) do |file|
       cs.extract_steps file
