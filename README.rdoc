@@ -27,3 +27,4 @@ and get something like this...
 Copyright (c) 2014 psytau. See LICENSE.txt for
 further details.
 
+{<img src="https://travis-ci.org/psytau/cucumber-slices.png?branch=master" alt="Build Status" />}[https://travis-ci.org/psytau/cucumber-slices]
