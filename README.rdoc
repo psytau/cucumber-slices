@@ -2,11 +2,11 @@
 
 Puts your steps right under your cucumber features.
 
-== Usage
+== Gist
 
 Say you have a feature called tic-tac-toe and you have written steps for it Just type
 
-  cucumber-slices tic-tac-toe
+  cucumber-slices features/tic-tac-toe.feature
 
 and get something like this...
 
@@ -22,6 +22,14 @@ and get something like this...
   11 		And who is X and who is O
   		  TicTacToe::SYMBOLS.should include @game.player_symbol, @game.computer_symbol
   
+This way you can see the steps for each feature directly under the features so it's easier to read.
+
+== Usage
+
+    cucumber-slices <feature_file> [--lines=<line_range>]
+
+You can also specify line numbers in the feature file if you want to limit the output.
+
 == Copyright
 
 Copyright (c) 2014 psytau. See LICENSE.txt for
