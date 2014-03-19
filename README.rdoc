@@ -1,6 +1,11 @@
 = cucumber-slices
 
-Puts your steps right under your cucumber features.
+Are long step definition files grating on your nerves?
+See your step definitions right under your cucumber features!
+
+== Install
+
+  gem install cucumber-slices
 
 == Gist
 
@@ -29,6 +34,16 @@ This way you can see the steps for each feature directly under the features so i
     cucumber-slices <feature_file> [--lines=<line_range>]
 
 You can also specify line numbers in the feature file if you want to limit the output.
+
+== TODO
+
+* Make the regexps more robust.
+* Syntax highlighting
+* Add more tests.
+
+== Contributing
+
+Feel free to add an issue or do a pull request.
 
 == Copyright
 
