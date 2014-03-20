@@ -1,6 +1,7 @@
 = cucumber-slices
 
 Are long step definition files grating on your nerves?
+
 See your step definitions right under your cucumber features!
 
 == Install
